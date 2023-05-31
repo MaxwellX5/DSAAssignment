@@ -90,6 +90,11 @@ def insertion_sort_pem_group(students):
             students[pos] = students[pos - 1]
             pos -= 1
         students[pos] = value
+        print("Pass ",count)
+        count += 1
+        print("**********************************")
+        for student in students:
+            print("PEM Group: ",student.get_pem_group())
     print("Students sorted by PEM Group in ascending order")
     display_students(students)
 
