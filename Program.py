@@ -10,7 +10,7 @@ def display_students(students):
 
 def add_student(students):
     admin_no = input("Enter AdminNo: ")
-    duplicate = False
+    duplicate_found = False
     for student in students:
         if admin_no == student.get_admin_no():
             duplicate_found = True
