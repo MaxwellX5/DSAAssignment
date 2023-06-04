@@ -95,6 +95,7 @@ def insertion_sort_pem_group(students):
         print("**********************************")
         for student in students:
             print("PEM Group: ",student.get_pem_group())
+    print("")
     print("Students sorted by PEM Group in ascending order")
     display_students(students)
 
