@@ -1,3 +1,9 @@
+#Name: Wong Fook Weng Matthew Oliver
+#Admin No: 220261J
+#IT2553-01
+#SF2201
+
+
 from Student import Student
 
 def display_students(students):
@@ -65,6 +71,10 @@ def bubble_sort_admin_no(students):
                 students[j] = students[j+1]
                 students[j+1] = tmp
                 swapmade = True
+        if swapmade == False and count == 1:
+            print("Pass ",count)
+            for student in students:
+                print("AdminNum: ",student.get_admin_no())
         if swapmade == False:
             break
         print(" ")

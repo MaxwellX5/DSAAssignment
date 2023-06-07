@@ -1,3 +1,7 @@
+#Name: Wong Fook Weng Matthew Oliver
+#Admin No: 220261J
+#IT2553-01
+#SF2201
 class Student:
     def __init__(self,admin_no,student_name,student_email,year_admitted,pem_group):
         self.__admin_no = admin_no
