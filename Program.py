@@ -5,7 +5,7 @@
 
 
 from Student import Student
-
+from RequestCodes import*
 def display_students(students):
     if len(students) == 0:
         print("No students entered yet")
@@ -113,14 +113,10 @@ def insertion_sort_pem_group(students):
 def selection_sort_name(students):
     n = len(students)
     for i in range(n - 1):
-        # Assume the ith element is the smallest.
         smallNdx = i
-        # Determine if any other element contains a smaller value.
         for j in range(i + 1, n):
             if students[j].get_student_name() < students[smallNdx].get_student_name():
                 smallNdx = j
-        # Swap the ith value and smallNdx value only if the smallest
-        # value is not already in its proper position.
         if smallNdx != i:
             tmp = students[i]
             students[i] = students[smallNdx]
@@ -194,6 +190,7 @@ def populateData():
 
 def main():
     students = []
+    requests = []
     requestmenu = False
     while True:
         if requestmenu == True:
@@ -219,8 +216,8 @@ def main():
             print("0. Exit.")
             print("9. Populate data")
 
-        choice = input("Enter your choice (1-5): ")
         if requestmenu == False:
+            choice = input("Enter your choice (0-9): ")
             if choice == '1':
                 display_students(students)
             elif choice == '2':
@@ -244,12 +241,13 @@ def main():
                 print("Invalid choice. Please enter a number between 0 and 9.")
 
         else:
+            choice = input("Enter your choice (0-3): ")
             if choice == '1':
-                print("Enter Student's Request.")
+                add_request(students,requests)
             elif choice == '2':
-                print("View Number of Requests.")
+                display_requests_no(requests)
             elif choice == '3':
-                print("Service next in Queue.")
+                service_request(students,requests)
             elif choice == '0':
                 requestmenu = False
             else:
