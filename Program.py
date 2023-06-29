@@ -6,14 +6,53 @@
 
 from Student import Student
 from RequestCodes import*
-def display_students(students):
-    if len(students) == 0:
-        print("No students entered yet")
+# def display_students(students):
+#     if len(students) == 0:
+#         print("No students entered yet")
+#
+#     else:
+#         print("Students List:")
+#         for student in students:
+#             print(student)
 
-    else:
-        print("Students List:")
-        for student in students:
-            print(student)
+def display_students(students, records_per_row):
+    if not students:
+        return
+
+    current_group = students[:records_per_row]
+    remaining_students = students[records_per_row:]
+
+    attributes = ["Admin No:", "Name:", "Email:", "Year Admitted:", "PEM:"]
+
+    for i in range(len(attributes)):
+        for student in current_group:
+            attribute_value = ""
+
+            if i == 0:
+                attribute_value = student.get_admin_no()
+            elif i == 1:
+                attribute_value = student.get_student_name()
+            elif i == 2:
+                attribute_value = student.get_student_email()
+            elif i == 3:
+                attribute_value = student.get_year_admitted()
+            elif i == 4:
+                attribute_value = student.get_pem_group()
+
+            print(f"{attributes[i]:<2}{attribute_value:<20}", end="")
+
+        print()
+
+    print()
+    display_students(remaining_students, records_per_row)
+
+
+def print_student_record(student):
+    print("Admin No:", student.get_admin_no())
+    print("Name:", student.get_student_name())
+    print("Email:", student.get_student_email())
+    print("Year Admitted:", student.get_year_admitted())
+    print("PEM:", student.get_pem_group())
 
 def add_student(students):
     admin_no = input("Enter AdminNo: ")
@@ -191,6 +230,7 @@ def populateData():
 def main():
     students = []
     requests = []
+    records_per_row = 3
     requestmenu = False
     while True:
         if requestmenu == True:
@@ -220,7 +260,7 @@ def main():
         if requestmenu == False:
             choice = input("Enter your choice (0-9): ")
             if choice == '1':
-                display_students(students)
+                display_students(students, records_per_row)
             elif choice == '2':
                 add_student(students)
             elif choice == '3':
