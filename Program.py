@@ -213,6 +213,7 @@ def main():
             print("5. Sort students by Name in ascending order.")
             print("6. Sort students via Merge sort on PEM Group follwed by Admin Number in ascending order. ")
             print("7. Enter Students' request.")
+            print("8. Set number of records per row to display.")
             print("0. Exit.")
             print("9. Populate data")
 
