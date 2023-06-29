@@ -11,6 +11,7 @@ def display_students(students):
         print("No students entered yet")
 
     else:
+        print("Students List:")
         for student in students:
             print(student)
 
@@ -109,6 +110,62 @@ def insertion_sort_pem_group(students):
     print("Students sorted by PEM Group in ascending order")
     display_students(students)
 
+def selection_sort_name(students):
+    n = len(students)
+    for i in range(n - 1):
+        # Assume the ith element is the smallest.
+        smallNdx = i
+        # Determine if any other element contains a smaller value.
+        for j in range(i + 1, n):
+            if students[j].get_student_name() < students[smallNdx].get_student_name():
+                smallNdx = j
+        # Swap the ith value and smallNdx value only if the smallest
+        # value is not already in its proper position.
+        if smallNdx != i:
+            tmp = students[i]
+            students[i] = students[smallNdx]
+            students[smallNdx] = tmp
+
+def merge_sort_pem_group_admin_no(students):
+    if len(students) <= 1:
+        return students
+    else:
+        mid = len(students) // 2
+        left = merge_sort_pem_group_admin_no(students[:mid])
+        right = merge_sort_pem_group_admin_no(students[mid:])
+        newlst = mergelists(left, right)
+        return newlst
+def mergelists(left,right):
+    lst = []
+    while len(left) > 0 and len(right) > 0:
+        if left[0].get_pem_group() < right[0].get_pem_group():
+            lst.append(left[0])
+            left.pop(0)
+        elif right[0].get_pem_group() < left[0].get_pem_group():
+            lst.append(right[0])
+            right.pop(0)
+        else:
+            if left[0].get_admin_no() < right[0].get_admin_no():
+                lst.append(left[0])
+                left.pop(0)
+            else:
+                lst.append(right[0])
+                right.pop(0)
+    while len(left) > 0:
+        lst.append(left[0])
+        left.pop(0)
+    while len(right) > 0:
+        lst.append(right[0])
+        right.pop(0)
+
+    print("New List: ")
+    print("---------------------")
+    for student in lst:
+        print(student.get_admin_no())
+    print("---------------------")
+    return lst
+
+
 def populateData():
     studList = []
     newStudA = Student("2101252Y", "steve", "steve@mail.com",
@@ -137,34 +194,66 @@ def populateData():
 
 def main():
     students = []
+    requestmenu = False
     while True:
-        print("")
-        print("*******************************")
-        print("Student Management System Menu:")
-        print("1. Display all students.")
-        print("2. Add a new student.")
-        print("3. Sort students by AdminNo in descending order.")
-        print("4. Sort students by PEM Group in ascending order.")
-        print("5. Exit.")
-        print("9. Populate data")
+        if requestmenu == True:
+            print("")
+            print("*******************************")
+            print("Student's Request Page: ")
+            print("1. Enter Student's Request.")
+            print("2. View Number of Requests.")
+            print("3. Service next in Queue.")
+            print("0. Return to Main Menu.")
+
+        elif requestmenu == False:
+            print("")
+            print("*******************************")
+            print("Student Management System Menu:")
+            print("1. Display all students.")
+            print("2. Add a new student.")
+            print("3. Sort students by AdminNo in descending order.")
+            print("4. Sort students by PEM Group in ascending order.")
+            print("5. Sort students by Name in ascending order.")
+            print("6. Sort students via Merge sort on PEM Group follwed by Admin Number in ascending order. ")
+            print("7. Enter Students' request.")
+            print("0. Exit.")
+            print("9. Populate data")
 
         choice = input("Enter your choice (1-5): ")
+        if requestmenu == False:
+            if choice == '1':
+                display_students(students)
+            elif choice == '2':
+                add_student(students)
+            elif choice == '3':
+                bubble_sort_admin_no(students)
+            elif choice == '4':
+                insertion_sort_pem_group(students)
+            elif choice == '5':
+                selection_sort_name(students)
+            elif choice == '6':
+                display_students(merge_sort_pem_group_admin_no(students))
+            elif choice == '7':
+                requestmenu = True
+            elif choice == '0':
+                print("Exiting the program.")
+                break
+            elif choice == '9':
+                students = populateData()
+            else:
+                print("Invalid choice. Please enter a number between 0 and 9.")
 
-        if choice == '1':
-            display_students(students)
-        elif choice == '2':
-            add_student(students)
-        elif choice == '3':
-            bubble_sort_admin_no(students)
-        elif choice == '4':
-            insertion_sort_pem_group(students)
-        elif choice == '5':
-            print("Exiting the program.")
-            break
-        elif choice == '9':
-            students = populateData()
         else:
-            print("Invalid choice. Please enter a number between 1 and 5.")
+            if choice == '1':
+                print("Enter Student's Request.")
+            elif choice == '2':
+                print("View Number of Requests.")
+            elif choice == '3':
+                print("Service next in Queue.")
+            elif choice == '0':
+                requestmenu = False
+            else:
+                print("Invalid choice. Please enter a number between 0 and 3.")
 
 
 if __name__ == '__main__':

@@ -41,5 +41,5 @@ class Student:
         self.__pem_group = pem_group
 
     def __str__(self):
-        s = "AdminNo: {}, Student Name: {}, Student Email: {}, Year Admitted: {}, PEM Group: {}".format(self.get_admin_no(), self.get_student_name(), self.get_student_email(), self.get_year_admitted(), self.get_pem_group())
+        s = "-----------------------------\nAdmin No: {}\nStudent Name: {}\nStudent Email: {}\nYear Admitted: {}\nPEM Group: {}".format(self.get_admin_no(), self.get_student_name(), self.get_student_email(), self.get_year_admitted(), self.get_pem_group())
         return s
