@@ -15,36 +15,77 @@ from RequestCodes import*
 #         for student in students:
 #             print(student)
 
-def display_students(students, records_per_row):
+# def display_students(students, records_per_row):
+#     if not students:
+#         return
+#
+#     current_group = students[:records_per_row]
+#     remaining_students = students[records_per_row:]
+#
+#     attributes = ["Admin No:", "Name:", "Email:", "Year Admitted:", "PEM:"]
+#
+#     for i in range(len(attributes)):
+#         for student in current_group:
+#             attribute_value = ""
+#
+#             if i == 0:
+#                 attribute_value = student.get_admin_no()
+#             elif i == 1:
+#                 attribute_value = student.get_student_name()
+#             elif i == 2:
+#                 attribute_value = student.get_student_email()
+#             elif i == 3:
+#                 attribute_value = student.get_year_admitted()
+#             elif i == 4:
+#                 attribute_value = student.get_pem_group()
+#
+#             print(f"{attributes[i]:<20}{attribute_value:<20}", end="")
+#
+#         print()
+#
+#     print()
+#     display_students(remaining_students, records_per_row)
+
+def display_students(students,records_per_row):
     if not students:
         return
-
-    current_group = students[:records_per_row]
-    remaining_students = students[records_per_row:]
-
-    attributes = ["Admin No:", "Name:", "Email:", "Year Admitted:", "PEM:"]
-
-    for i in range(len(attributes)):
+    else:
+        current_group = students[:records_per_row]
+        remaining_group = students[records_per_row::]
+        admin_no_lst = []
+        name_lst = []
+        email_lst = []
+        year_admitted_lst = []
+        pem_lst = []
         for student in current_group:
-            attribute_value = ""
+            admin_no_lst.append(student.get_admin_no())
+            name_lst.append(student.get_student_name())
+            email_lst.append(student.get_student_email())
+            year_admitted_lst.append(student.get_year_admitted())
+            pem_lst.append(student.get_pem_group())
+        for no in admin_no_lst:
+            print(f"Admin No: {no:<20}",end="")
+            # print(f"{attributes[i]:<20}{attribute_value:<20}", end="")
+            # print("")
+            # print("Admin No: ",no:<20)
 
-            if i == 0:
-                attribute_value = student.get_admin_no()
-            elif i == 1:
-                attribute_value = student.get_student_name()
-            elif i == 2:
-                attribute_value = student.get_student_email()
-            elif i == 3:
-                attribute_value = student.get_year_admitted()
-            elif i == 4:
-                attribute_value = student.get_pem_group()
 
-            print(f"{attributes[i]:<2}{attribute_value:<20}", end="")
-
-        print()
-
-    print()
-    display_students(remaining_students, records_per_row)
+        print("")
+        for name in name_lst:
+            print(f"Name: {name:<20}",end="    ")
+            # print("Name: ",name,end="          ")
+        print("")
+        for email in email_lst:
+            print(f"Email: {email:<20}",end="   ")
+        print("")
+        for year in year_admitted_lst:
+            print(f"Year: {year:<20}",end="    ")
+        print("")
+        for pem in pem_lst:
+            print(f"PEM: {pem:<20}",end="     ")
+        print("")
+        print("")
+        display_students(remaining_group,records_per_row)
 
 
 def print_student_record(student):
