@@ -271,7 +271,7 @@ def populateData():
 def main():
     students = []
     requests = []
-    records_per_row = 3
+    records_per_row = 1
     requestmenu = False
     while True:
         if requestmenu == True:
@@ -314,6 +314,12 @@ def main():
                 display_students(merge_sort_pem_group_admin_no(students))
             elif choice == '7':
                 requestmenu = True
+            elif choice == '8':
+                records_per_row = (input("Enter number of records per row to display: "))
+                while records_per_row.isdigit() == False:
+                    records_per_row = (input("Enter number of records per row to display: "))
+                records_per_row = int(records_per_row)
+
             elif choice == '0':
                 print("Exiting the program.")
                 break
