@@ -5,6 +5,7 @@
 
 
 from StudRequest import StudRequest
+from Queue import Queue
 def add_request(students, requests):
     admin_no = input("Enter Admin No: ")
     while search_valid_admin_no(students, admin_no) == False:
@@ -14,8 +15,8 @@ def add_request(students, requests):
     while request.strip() == "":
         print("Invalid Request. Please try again!")
         request = input("Enter Request: ")
-    requests.append(StudRequest(admin_no, request))
-    print("Request added successfully!.")
+    requests.enqueue(StudRequest(admin_no, request))
+    print("Request added successfully!")
 
 def search_valid_admin_no(students, admin_no):
     last_index = len(students) - 1
@@ -27,24 +28,42 @@ def search_valid_admin_no(students, admin_no):
 def search_student_by_admin_no(students, admin_no):
     last_index = len(students) - 1
     for i in range(len(students)):
-        if students[i].get_admin_no() == admin_no or students[last_index-i].get_admin_no() == admin_no:
+        if students[i].get_admin_no() == admin_no:
             return students[i]
+        elif students[last_index-1].get_admin_no() == admin_no:
+            return students[last_index-1]
     return None
 
 def display_requests_no(requests):
-    print("\nNumber of Requests: " + str(len(requests)))
+    print("\nNumber of Requests: " + str(requests.size()))
 
-def service_request(students, requests):
-    if len(requests) == 0:
+# def service_request(students, requests):
+#     if requests.isEmpty():
+#         print("No requests entered yet")
+#     else:
+#         print("")
+#         print("Display Student's Request:\n")
+#         print(search_student_by_admin_no(students, requests[0].get_admin_no()))
+#         print("-----------------------------")
+#         print("Request: " + requests[0].get_request())
+#         print("-----------------------------")
+#
+#         requests.dequeue()
+#         print("\nRemaning requests: " + str(requests.size()))
+#
+#     return requests
+
+#code service requests usign Queue function
+def service_request(students,requests):
+    if requests.isEmpty():
         print("No requests entered yet")
     else:
         print("")
-        print("Display Student's Request:\n")
-        print(search_student_by_admin_no(students, requests[0].get_admin_no()))
+        print("Display Student's Request:")
+        print(search_student_by_admin_no(students, requests.peek().get_admin_no()))
         print("-----------------------------")
-        print("Request: " + requests[0].get_request())
+        print("Request: "+requests.dequeue().get_request())
         print("-----------------------------")
-        requests.pop(0)
-        print("\nRemaning requests: " + str(len(requests)))
+        print("\nRemaning requests: " + str(requests.size()))
 
     return requests

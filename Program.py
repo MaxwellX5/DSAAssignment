@@ -6,6 +6,7 @@
 
 from Student import Student
 from RequestCodes import*
+from Queue import Queue
 # def display_students(students):
 #     if len(students) == 0:
 #         print("No students entered yet")
@@ -270,7 +271,7 @@ def populateData():
 
 def main():
     students = []
-    requests = []
+    requests = Queue()
     records_per_row = 1
     requestmenu = False
     while True:
