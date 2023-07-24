@@ -7,45 +7,6 @@
 from Student import Student
 from RequestCodes import*
 from Queue import Queue
-# def display_students(students):
-#     if len(students) == 0:
-#         print("No students entered yet")
-#
-#     else:
-#         print("Students List:")
-#         for student in students:
-#             print(student)
-
-# def display_students(students, records_per_row):
-#     if not students:
-#         return
-#
-#     current_group = students[:records_per_row]
-#     remaining_students = students[records_per_row:]
-#
-#     attributes = ["Admin No:", "Name:", "Email:", "Year Admitted:", "PEM:"]
-#
-#     for i in range(len(attributes)):
-#         for student in current_group:
-#             attribute_value = ""
-#
-#             if i == 0:
-#                 attribute_value = student.get_admin_no()
-#             elif i == 1:
-#                 attribute_value = student.get_student_name()
-#             elif i == 2:
-#                 attribute_value = student.get_student_email()
-#             elif i == 3:
-#                 attribute_value = student.get_year_admitted()
-#             elif i == 4:
-#                 attribute_value = student.get_pem_group()
-#
-#             print(f"{attributes[i]:<20}{attribute_value:<20}", end="")
-#
-#         print()
-#
-#     print()
-#     display_students(remaining_students, records_per_row)
 
 def display_students(students,records_per_row):
     if not students:
@@ -141,10 +102,9 @@ def add_student(students):
     student = Student(admin_no,name,email,year_admitted,pem_group)
     students.append(student)
 
-def bubble_sort_admin_no(students):
+def bubble_sort_admin_no(students,records_per_row):
     n = len(students)
     count = 1
-
     for i in range(n-1,0,-1):
         swapmade = False
         for j in range(i):
@@ -170,9 +130,9 @@ def bubble_sort_admin_no(students):
     print("")
     print("**************************************")
     print("Students sorted by Admin Number in descending order: ")
-    display_students(students)
+    display_students(students,records_per_row)
 
-def insertion_sort_pem_group(students):
+def insertion_sort_pem_group(students,records_per_row):
     n = len(students)
     count = 1
     for i in range(1, n):
@@ -189,19 +149,31 @@ def insertion_sort_pem_group(students):
             print("PEM Group: ",student.get_pem_group())
     print("")
     print("Students sorted by PEM Group in ascending order")
-    display_students(students)
+    display_students(students, records_per_row)
 
-def selection_sort_name(students):
+def selection_sort_name(students,records_per_row):
     n = len(students)
-    for i in range(n - 1):
+    #Number of passes is n//2 and not n-1 as this is optimised selection sort
+    for i in range(n//2):
         smallNdx = i
-        for j in range(i + 1, n):
+        largeNdx = i
+        for j in range(i+1, n-1):
             if students[j].get_student_name() < students[smallNdx].get_student_name():
                 smallNdx = j
+            elif students[j].get_student_name() > students[largeNdx].get_student_name():
+                largeNdx = j
         if smallNdx != i:
-            tmp = students[i]
-            students[i] = students[smallNdx]
-            students[smallNdx] = tmp
+            students[i], students[smallNdx] = students[smallNdx], students[i]
+
+        #Handles case where largeNdx was previously at i and the element at largeNdx was swapped with the element at smallNdx
+        if largeNdx == i:
+            largeNdx = smallNdx
+
+        #Swap the last element in the list with the element at largeNdx if largeNdx is not already the last element in the loop
+        if largeNdx != n-i-1:
+            students[n-i-1], students[largeNdx] = students[largeNdx], students[n-i-1]
+
+    display_students(students,records_per_row)
 
 def merge_sort_pem_group_admin_no(students):
     if len(students) <= 1:
@@ -306,13 +278,13 @@ def main():
             elif choice == '2':
                 add_student(students)
             elif choice == '3':
-                bubble_sort_admin_no(students)
+                bubble_sort_admin_no(students, records_per_row)
             elif choice == '4':
-                insertion_sort_pem_group(students)
+                insertion_sort_pem_group(students, records_per_row)
             elif choice == '5':
-                selection_sort_name(students)
+                selection_sort_name(students, records_per_row)
             elif choice == '6':
-                display_students(merge_sort_pem_group_admin_no(students))
+                display_students(merge_sort_pem_group_admin_no(students), records_per_row)
             elif choice == '7':
                 requestmenu = True
             elif choice == '8':
