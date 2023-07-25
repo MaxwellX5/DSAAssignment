@@ -3,6 +3,7 @@
 #IT2553-01
 #SF2201
 
+#Question 3a
 class StudRequest():
     def __init__(self,admin_no, request):
         self.__admin_no = admin_no

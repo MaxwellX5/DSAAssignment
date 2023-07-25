@@ -6,6 +6,8 @@
 
 from StudRequest import StudRequest
 from Queue import Queue
+
+#Question 3a
 def add_request(students, requests):
     admin_no = input("Enter Admin No: ")
     #Checks if the admin_no given is valid
@@ -21,6 +23,7 @@ def add_request(students, requests):
     requests.enqueue(StudRequest(admin_no, request))
     print("Request added successfully!")
 
+#Question 3a
 #Sequential search to check if admin_no given exists in the list of students
 def search_valid_admin_no(students, admin_no):
     last_index = len(students) - 1
@@ -29,6 +32,7 @@ def search_valid_admin_no(students, admin_no):
             return True
     return False
 
+#Question 3c
 #Sequential search to return the student object that belongs to the admin_no given
 def search_student_by_admin_no(students, admin_no):
     last_index = len(students) - 1
@@ -39,10 +43,12 @@ def search_student_by_admin_no(students, admin_no):
             return students[last_index-1]
     return None
 
+#Question 3b
 def display_requests_no(requests):
     print("\nNumber of Requests: " + str(requests.size()))
 
 
+#Question 3c
 def service_request(students,requests):
     if requests.isEmpty():
         print("No requests entered yet")
