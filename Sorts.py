@@ -103,39 +103,41 @@ def merge_sort_pem_group_admin_no(students):
         return newlst
 def mergelists(left,right):
     #Create a new list to store the merged list
-    lst = []
-
+    lst = list()
+    leftpointer = 0
+    rightpointer = 0
     #Loop through the lists and compare the first element of each list. Loops until either list is empty
-    while len(left) > 0 and len(right) > 0:
+    while leftpointer < len(left) and rightpointer < len(right):
         #Compares the pem group of the first element of the 2 lists.
 
-        #If the pem group of the first element of the left list is smaller,
-        #append this element to the new list and remove it from the left list
-        if left[0].get_pem_group() < right[0].get_pem_group():
-            lst.append(left[0])
-            left.pop(0)
-        #If the pem group of the first element of the right list is smaller,
-        #append this element to the new list and remove it from the right list
-        elif right[0].get_pem_group() < left[0].get_pem_group():
-            lst.append(right[0])
-            right.pop(0)
+        #If the pem group of the leftpointer'th element of the left list is smaller than the rightpointer'th element of the right list,
+        #append the leftpointer'th element of the left list to the new list and increase the leftpointer by 1
+        if left[leftpointer].get_pem_group() < right[rightpointer].get_pem_group():
+            lst.append(left[leftpointer])
+            leftpointer += 1
+        #If the pem group of the rightpointer'th element of the right list is smaller than the leftpointer'th element of the left list,
+        #append the rightpointer'th element of the right list to the new list and increase the rightpointer by 1
+        elif right[rightpointer].get_pem_group() < left[leftpointer].get_pem_group():
+            lst.append(right[rightpointer])
+            rightpointer += 1
         #If the pem group of the first element of both lists are the same,
-        #compare the admin number of the first element of both lists.
+        #compare the admin number of the leftpointer'th element of the left lists and the rightpointer'th element of the right list
+        #Increase the counter of whichever counter's element is smaller by 1 and append that element to the new list
         else:
-            if left[0].get_admin_no() < right[0].get_admin_no():
-                lst.append(left[0])
-                left.pop(0)
+            if left[leftpointer].get_admin_no() < right[rightpointer].get_admin_no():
+                lst.append(left[leftpointer])
+                leftpointer += 1
             else:
-                lst.append(right[0])
-                right.pop(0)
+                lst.append(right[rightpointer])
+                rightpointer += 1
 
     #Append the remaining elements of the list that is not empty to the new list
-    while len(left) > 0:
-        lst.append(left[0])
-        left.pop(0)
-    while len(right) > 0:
-        lst.append(right[0])
-        right.pop(0)
+    while leftpointer < len(left):
+        lst.append(left[leftpointer])
+        leftpointer += 1
+    while rightpointer < len(right):
+        lst.append(right[rightpointer])
+        rightpointer += 1
 
     print("New List: ")
     print("---------------------")
