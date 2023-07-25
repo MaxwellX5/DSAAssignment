@@ -61,6 +61,6 @@ def service_request(students,requests):
         #Remove the request from the queue and displays the request
         print("Request: "+requests.dequeue().get_request())
         print("-----------------------------")
-        print("\nRemaning requests: " + str(requests.size()))
+        print("\nRemaining requests: " + str(requests.size()))
 
     return requests
