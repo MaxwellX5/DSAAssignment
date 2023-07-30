@@ -102,7 +102,7 @@ def merge_sort_pem_group_admin_no(students):
         '''
         https://www.geeksforgeeks.org/make-mergesort-perform-comparisons-best-case/
         Makes the time complexity for best case O(n) compared to  O(n log n) for the normal implementation of merge sort.
-        The mergelists function will only be called when the left list and right list are not sorted.
+        The mergelists function will only be called when the left list and right list of that particular call of merge_sort_pem_group_admin_no are not sorted.
         This reduces the number of calls for mergelists making the code more efficient.
         For example, when doing merge sort for [1,2,3,4,8,7,6,5], the mergelists function wont get called for the left half.
         '''
