@@ -161,6 +161,6 @@ def mergelists(left,right):
     print("New List: ")
     print("---------------------")
     for student in lst:
-        print(student.get_admin_no())
+        print(student.get_admin_no(),student.get_pem_group())
     print("---------------------")
     return lst
