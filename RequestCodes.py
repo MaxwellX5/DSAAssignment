@@ -56,10 +56,11 @@ def service_request(students,requests):
         print("")
         print("Display Student's Request:")
         #Displays the student details of the student who made the request
-        print(search_student_by_admin_no(students, requests.peek().get_admin_no()))
+        request = requests.dequeue()
+        print(search_student_by_admin_no(students, request.get_admin_no()))
         print("-----------------------------")
         #Remove the request from the queue and displays the request
-        print("Request: "+requests.dequeue().get_request())
+        print("Request: "+request.get_request())
         print("-----------------------------")
         print("\nRemaining requests: " + str(requests.size()))
 

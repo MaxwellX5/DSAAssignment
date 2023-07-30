@@ -2,7 +2,7 @@ from Queue import Queue
 from Student import Student
 from StudRequest import StudRequest
 from StudentCodes import display_students, add_student
-from RequestCodes import display_requests_no, service_request, add_request
+from RequestCodes import display_requests_no, service_request, add_request, search_valid_admin_no
 from Sorts import bubble_sort_admin_no, insertion_sort_pem_group, selection_sort_name, merge_sort_pem_group_admin_no
 
 
@@ -32,8 +32,12 @@ def populateStudentData():
     print("Data populated!\n")
     return studList
 
-def populateRequestData():
+def populateRequestData(students):
     requestList = Queue()
+    #Testing the search_valid_admin_no function
+    print("Testing Admin number that doesnt exist in student list: 2212451D", search_valid_admin_no(students,"2212451D"))
+    print("Does admin number 2101252Y exist in students list?", search_valid_admin_no(students,"2101252Y"))
+    #Adding requests with admin numbers that exist in the student list
     newRequest1 = StudRequest("2101252Y", "I need help with my assignment")
     requestList.enqueue(newRequest1)
     newRequest2 = StudRequest("2121613Y", "I need help with my project")
@@ -97,7 +101,7 @@ def main():
                 break
             elif choice == '9':
                 students = populateStudentData()
-                requests = populateRequestData()
+                requests = populateRequestData(students)
             else:
                 print("Invalid choice. Please enter a number between 0 and 9.")
 
