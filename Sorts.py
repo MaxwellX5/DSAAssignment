@@ -86,6 +86,7 @@ def selection_sort_name(students,records_per_row):
     display_students(students,records_per_row)
 
 #Question 2
+#Optimised merge sort (See below)
 def merge_sort_pem_group_admin_no(students):
     #Base case
     if len(students) <= 1:
@@ -97,10 +98,28 @@ def merge_sort_pem_group_admin_no(students):
         #Call the function again for the left and right halves to divide the list into smaller lists until the base case is reached
         left = merge_sort_pem_group_admin_no(students[:mid])
         right = merge_sort_pem_group_admin_no(students[mid:])
-        #Call mergelists function to merge the lists
-        newlst = mergelists(left, right)
-        #Return the merged list
-        return newlst
+
+        '''
+        https://www.geeksforgeeks.org/make-mergesort-perform-comparisons-best-case/
+        Makes the time complexity for best case O(n) compared to  O(n log n) for the normal implementation of merge sort.
+        The mergelists function will only be called when the left list and right list are not sorted.
+        This reduces the number of calls for mergelists making the code more efficient.
+        For example, when doing merge sort for [1,2,3,4,8,7,6,5], the mergelists function wont get called for the left half.
+        '''
+
+        #Call mergelists function to merge the lists if the lists are not sorted
+        if left[-1].get_pem_group() > right[0].get_pem_group():
+            newlst = mergelists(left, right)
+            return newlst
+
+        #Call mergelists function to merge the lists if the lists are not sorted when pem group is the same but admin_no is not sorted
+        elif left[-1].get_pem_group() == right[0].get_pem_group() and left[-1].get_admin_no() > right[0].get_admin_no():
+            newlst = mergelists(left, right)
+            return newlst
+        #Skips the need to call the mergelists function as it is already sorted
+        else:
+            return left + right
+
 def mergelists(left,right):
     #Create a new list to store the merged list
     lst = list()
