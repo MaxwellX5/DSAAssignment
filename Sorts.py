@@ -62,10 +62,10 @@ def selection_sort_name(students,records_per_row):
     for i in range(n//2):
         smallNdx = i
         largeNdx = i
-        for j in range(i+1, n-1):
+        for j in range(i+1, n-i):
             if students[j].get_student_name() < students[smallNdx].get_student_name():
                 smallNdx = j
-            elif students[j].get_student_name() > students[largeNdx].get_student_name():
+            if students[j].get_student_name() > students[largeNdx].get_student_name():
                 largeNdx = j
         if smallNdx != i:
             students[i], students[smallNdx] = students[smallNdx], students[i]
